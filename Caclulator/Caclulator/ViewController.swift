@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBAction func MainButton(_ sender: Any) {
         sum += 1;
         print("The sum is \(sum)")
-    }
+        }
     
     
     override func viewDidLoad() {

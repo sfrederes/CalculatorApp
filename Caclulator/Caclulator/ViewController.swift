@@ -9,7 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var sum = 0;
 
+    @IBAction func MainButton(_ sender: Any) {
+        sum += 1;
+        print("The sum is \(sum)")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

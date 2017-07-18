@@ -13,19 +13,20 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var Display: UILabel!
     
-    var result = "0"
+    var userIsTyping = false
     
     @IBAction func Button_dig(_ sender: UIButton) {
-        if (Display.text! == "0"){
-            Display.text = sender.currentTitle!
+        if (userIsTyping){
+            Display.text = Display.text! + sender.currentTitle!
+            
         }
         else{
-            Display.text = Display.text! + sender.currentTitle!
+            Display.text = sender.currentTitle!
+            userIsTyping = true
         }
-        result = Display.text!
     }
     
-    var display_value : Double {
+    var displayValue : Double {
         get {
             return Double(Display.text!)!
         }
@@ -34,19 +35,18 @@ class ViewController: UIViewController {
         }
     }
     
+    private var brain = CalculatorBrain()
+    
     @IBAction func Button_op(_ sender: UIButton) {
-        if let mathmatical_symbol = sender.currentTitle {
-            switch mathmatical_symbol {
-            case "C":
-                Display.text = "0"
-                result = "0"
-            case "=":
-                Display.text = result
-            case "√":
-                display_value = sqrt(display_value)
-            default:
-                break
-            }
+        if userIsTyping{
+            brain.setOperand(displayValue)
+            userIsTyping = false
+        }
+        if let mathmaticalSymbol = sender.currentTitle {
+            brain.performOperation(mathmaticalSymbol)
+        }
+        if let result = brain.result{
+            displayValue = result
         }
     }
 
